@@ -1,4 +1,4 @@
-package cn.acrab.peach.Schedule;
+package cn.acrab.peach.schedule;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ public class FixedDelaySchedule {
     // fixedDelay 固定等候时长,执行完之后再等待设定的时长
     @Scheduled(fixedDelay = 5000, initialDelay = 100)
     void sayHello() {
-        log.info("Hello,Fixed Delay Schedule.");
+        log.info("Hello,Fixed Delay schedule.");
         try {
             Thread.currentThread().sleep(1000);
         } catch (Exception ex){

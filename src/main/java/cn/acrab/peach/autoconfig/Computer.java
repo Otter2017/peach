@@ -4,6 +4,8 @@ import cn.acrab.peach.aop.Log;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 
 @Component
 @ConfigurationProperties(prefix = "computer")
@@ -42,6 +44,11 @@ public class Computer {
     @Log(level = "TRACE")
     public String buy() {
         return "Buy a computer.";
+    }
+
+    @PostConstruct
+    void afterConstruct(){
+        System.out.println("Computer created.");
     }
 
     @Override

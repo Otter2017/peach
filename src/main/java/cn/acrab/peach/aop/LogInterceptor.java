@@ -19,6 +19,8 @@ public class LogInterceptor {
 
     ThreadLocal<Date> beginTime = new ThreadLocal<>();
 
+    Class clazz =null;
+
     // 定义一个注解切入点
     @Pointcut("@annotation(log)")
     public void logMethodTime(Log log) {
@@ -29,7 +31,7 @@ public class LogInterceptor {
     public void beforeLog(JoinPoint joinPoint, Log log) {
         beginTime.set(new Date(System.currentTimeMillis()));
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-        Class clazz = method.getDeclaringClass();
+        clazz = method.getDeclaringClass();
         if (log != null) {
             Logger logger = LoggerFactory.getLogger(clazz);
             logger.info("Method:[" + method.getName() + "] Begin,log level is " + log.level());
@@ -41,7 +43,6 @@ public class LogInterceptor {
     public void afterLog(JoinPoint joinPoint, Log log) {
         long interval = System.currentTimeMillis() - beginTime.get().getTime();
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-        Class clazz = method.getDeclaringClass();
         if (log != null) {
             Logger logger = LoggerFactory.getLogger(clazz);
             logger.info("Method:[" + method.getName() + "] End,log level is " + log.level() + " and Total execute time is " + interval + " ms.");

@@ -16,7 +16,7 @@ public class ConditionalBeanFactoty {
         return new PhoneFactory();
     }
 
-    // 当配置文件中的 factory.FoodFactory = true 时
+    // 当配置文件中的 factory.FoodFactory = true 时，因为和上面的使用的不是同一个配置，有可能因为配置冲突产生错误
     @Bean
     @ConditionalOnExpression(value = "${factory.FoodFactory:true}")
     public Factory createFood() {
